@@ -10,6 +10,7 @@ class Fenetre extends JFrame implements ActionListener {
 
     public Fenetre(String aTitle) {
         setTitle(aTitle);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         JPanel jpHaut = new JPanel(new BorderLayout());
         add(jpHaut, "North");
