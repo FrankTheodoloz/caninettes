@@ -1,3 +1,11 @@
+import com.esri.arcgisruntime.mapping.ArcGISMap;
+import com.esri.arcgisruntime.mapping.Basemap;
+import com.esri.arcgisruntime.mapping.view.MapView;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
@@ -7,6 +15,8 @@ class Fenetre extends JFrame implements ActionListener {
 
     //Bouton
     JButton btnConnexion, btnCaninettesHS, btnQuitter;
+    MapView mapView;
+
 
     public Fenetre(String aTitle) {
         setTitle(aTitle);
@@ -28,6 +38,26 @@ class Fenetre extends JFrame implements ActionListener {
         btnQuitter = new JButton("Quitter");
         jpWest.add(btnQuitter);
         btnQuitter.addActionListener(this);
+
+        // create stack pane and application scene
+        StackPane stackPane = new StackPane();
+        JFXPanel jfxPanel = new JFXPanel();
+        add(jfxPanel);
+        Scene scene = new Scene(stackPane, 800, 700);
+        jfxPanel.setScene(scene);
+
+        // create a ArcGISMap
+        ArcGISMap map = new ArcGISMap(Basemap.Type.TOPOGRAPHIC, 46.20692080361156, 6.142971280091718, 15);
+
+        // set the map to be displayed in this view
+        mapView = new MapView();
+        mapView.setMap(map);
+
+        // add the map view to stack pane
+        Platform.runLater(() -> {
+            stackPane.getChildren().addAll(mapView);
+        });
+
 
     }
 
