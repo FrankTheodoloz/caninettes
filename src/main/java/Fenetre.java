@@ -10,11 +10,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 class Fenetre extends JFrame implements ActionListener {
 
     //Bouton
-    JButton btnConnexion, btnCaninettesHS, btnQuitter;
+    JButton btnConnexion, btnCaninettesHS, btnQuitter, btnListeCani;
     MapView mapView;
 
 
@@ -34,6 +35,10 @@ class Fenetre extends JFrame implements ActionListener {
         btnCaninettesHS = new JButton("Caninettes hors service");
         jpWest.add(btnCaninettesHS);
         btnCaninettesHS.addActionListener(this);
+
+        btnListeCani = new JButton("Liste Caninettes");
+        jpWest.add(btnListeCani);
+        btnListeCani.addActionListener(this);
 
         btnQuitter = new JButton("Quitter");
         jpWest.add(btnQuitter);
@@ -65,6 +70,17 @@ class Fenetre extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if (event.getSource().equals(btnQuitter)) {
             System.exit(0);
+        }
+        if (event.getSource().equals(btnListeCani)) {
+            FenetreTestList fList = null;
+            try {
+                fList = new FenetreTestList("CaniCrottesTestListe");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            fList.pack();
+            fList.setLocationRelativeTo(null);
+            fList.setVisible(true);
         }
     }
 
