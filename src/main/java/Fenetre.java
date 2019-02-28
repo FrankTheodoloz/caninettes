@@ -18,6 +18,10 @@ class Fenetre extends JFrame implements ActionListener {
     JButton btnConnexion, btnCaninettesHS, btnQuitter, btnListeCani;
     MapView mapView;
 
+    //Constantes
+    private static final double LAT_GVA = 46.20692080361156;
+    private static final double LON_GVA = 6.142971280091718;
+    private static final int ZOOM_LEVEL = 15;
 
     public Fenetre(String aTitle) {
         setTitle(aTitle);
@@ -52,7 +56,7 @@ class Fenetre extends JFrame implements ActionListener {
         jfxPanel.setScene(scene);
 
         // create a ArcGISMap
-        ArcGISMap map = new ArcGISMap(Basemap.Type.TOPOGRAPHIC, 46.20692080361156, 6.142971280091718, 15);
+        ArcGISMap map = new ArcGISMap(Basemap.Type.TOPOGRAPHIC, LAT_GVA, LON_GVA, ZOOM_LEVEL);
 
         // set the map to be displayed in this view
         mapView = new MapView();

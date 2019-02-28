@@ -1,3 +1,7 @@
+/***
+ * Fichier pour tester l'affichage des points OpenData sur la carte
+ */
+
 import com.esri.arcgisruntime.data.ServiceFeatureTable;
 import com.esri.arcgisruntime.layers.FeatureLayer;
 import com.esri.arcgisruntime.mapping.view.GraphicsOverlay;

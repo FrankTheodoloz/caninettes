@@ -1,3 +1,7 @@
+/***
+ * Fichier pour tester l'affichage d'un pin sur la carte
+ */
+
 import com.esri.arcgisruntime.geometry.GeometryEngine;
 import com.esri.arcgisruntime.geometry.Point;
 import com.esri.arcgisruntime.geometry.SpatialReferences;
