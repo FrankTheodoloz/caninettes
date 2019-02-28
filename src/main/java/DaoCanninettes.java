@@ -9,12 +9,6 @@ public class DaoCanninettes extends DataBaseConnexion {
         super(urlDb);
     }
 
-    public static void main(String[] args) throws SQLException {
-        DaoCanninettes dao = new DaoCanninettes("jdbc:sqlite:mydatabase.db") ;
-        dao.afficherCaninette();
-    }
-
-
     public ArrayList <Caninette> afficherCaninette() {
         ArrayList listeCaninette = new ArrayList<Caninette>();
         try
