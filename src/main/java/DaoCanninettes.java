@@ -9,6 +9,11 @@ public class DaoCanninettes extends DataBaseConnexion {
         super(urlDb);
     }
 
+    public static void main(String[] args) throws SQLException {
+        DaoCanninettes daoCanninettes = new DaoCanninettes("jdbc:sqlite:mydatabase.db") ;
+        daoCanninettes.calculerNbEnregistrement();
+    }
+
     public ArrayList <Caninette> afficherCaninette() {
         ArrayList listeCaninette = new ArrayList<Caninette>();
         try
@@ -33,5 +38,31 @@ public class DaoCanninettes extends DataBaseConnexion {
             System.err.println("Erreur SQL : "+e.getMessage());
         }
         return listeCaninette;
+    }
+
+    public int calculerNbEnregistrement() {
+        int nbEnregistrement = 0;
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);  // set timeout to 30 sec.
+
+            ResultSet rs = statement.executeQuery("select * from Caninettes");
+            ;
+            while (rs.next())
+            {
+                // read the result set
+                Caninette caninette = new Caninette(rs.getInt("Can_id"),rs.getString("Can_adresse"),rs.getString("Can_numero"),rs.getString("Can_etat"), rs.getString("Can_remarques"),rs.getDouble("Can_positionE"),rs.getDouble("Can_positionN"));
+                nbEnregistrement++;
+            }
+
+        }
+        catch(SQLException e)
+        {
+            // if the error message is "out of memory",
+            // it probably means no database file is found
+            System.err.println("Erreur SQL : "+e.getMessage());
+        }
+        return nbEnregistrement;
     }
 }
