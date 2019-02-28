@@ -36,13 +36,13 @@ class Fenetre extends JFrame implements ActionListener {
         jpWest.add(btnConnexion);
         btnConnexion.addActionListener(this);
 
+        btnListeCani = new JButton("Liste des caninettes");
+        jpWest.add(btnListeCani);
+        btnListeCani.addActionListener(this);
+
         btnCaninettesHS = new JButton("Caninettes hors service");
         jpWest.add(btnCaninettesHS);
         btnCaninettesHS.addActionListener(this);
-
-        btnListeCani = new JButton("Liste Caninettes");
-        jpWest.add(btnListeCani);
-        btnListeCani.addActionListener(this);
 
         btnQuitter = new JButton("Quitter");
         jpWest.add(btnQuitter);
@@ -72,13 +72,27 @@ class Fenetre extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
+
         if (event.getSource().equals(btnQuitter)) {
             System.exit(0);
         }
+
         if (event.getSource().equals(btnListeCani)) {
             FenetreTestList fList = null;
             try {
-                fList = new FenetreTestList("CaniCrottesTestListe");
+                fList = new FenetreTestList("La liste de toutes les canninettes");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            fList.pack();
+            fList.setLocationRelativeTo(null);
+            fList.setVisible(true);
+        }
+
+        if (event.getSource().equals(btnCaninettesHS)) {
+            ListeCaninetteHS fList = null;
+            try {
+                fList = new ListeCaninetteHS("La liste des canninettes hors service");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
