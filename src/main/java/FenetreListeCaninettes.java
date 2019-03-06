@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import static com.sun.javafx.fxml.expression.Expression.add;
 
-public class FenetreTestList extends JFrame implements ActionListener{
+public class FenetreListeCaninettes extends JFrame implements ActionListener{
 
 
     //Bouton
@@ -16,7 +16,7 @@ public class FenetreTestList extends JFrame implements ActionListener{
 
 
 
-    public FenetreTestList(String aTitle) throws SQLException {
+    public FenetreListeCaninettes(String aTitle) throws SQLException {
         setTitle(aTitle);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         DaoCanninettes daoCanninettes = new DaoCanninettes("jdbc:sqlite:mydatabase.db") ;
