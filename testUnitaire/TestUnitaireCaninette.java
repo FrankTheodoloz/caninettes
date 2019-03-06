@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import static junit.framework.TestCase.assertEquals;
 
 
-/** Tester que le toString d'une caninette soit correct**/
+
 public class TestUnitaireCaninette {
+
+    /** Tester que le toString d'une caninette soit correct**/
     @Test public void affichageCaninette() {
         Caninette caninette = new Caninette(602, "Av. Curé-Baud 14", "2_99", "Posée", "Très belle", 2599865.69, 1112555.36 );
         String affichageAttendu = "Caninette n°: 602" +  "\n" +

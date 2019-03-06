@@ -3,11 +3,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import static junit.framework.TestCase.assertEquals;
 
-/** Tester la connexion à la base de données et le nombre d'enregistrements stockés**/
 public class TestUnitaireListeCaninette {
+
+    /** Tester la connexion à la base de données et le nombre d'enregistrements stockés**/
     @Test public void nbEnregistrementValide() throws SQLException {
         DaoCanninettes daoCanninettes = new DaoCanninettes("jdbc:sqlite:mydatabaseTest.db");
         int nbEnregistrement = daoCanninettes.afficherCaninette().size();
