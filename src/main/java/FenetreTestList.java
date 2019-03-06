@@ -9,7 +9,7 @@ import static com.sun.javafx.fxml.expression.Expression.add;
 
 public class FenetreTestList extends JFrame implements ActionListener{
 
-    private DaoCanninettes daoCanninettes;
+
     //Bouton
     JButton  btnQuitter;
     JTextArea listCani;

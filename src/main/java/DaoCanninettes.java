@@ -40,7 +40,7 @@ public class DaoCanninettes extends DataBaseConnexion {
         return listeCaninette;
     }
 
-    public int calculerNbEnregistrement() {
+    public int calculerNbEnregistrement( ) {
         int nbEnregistrement = 0;
         try
         {
@@ -63,6 +63,16 @@ public class DaoCanninettes extends DataBaseConnexion {
             // it probably means no database file is found
             System.err.println("Erreur SQL : "+e.getMessage());
         }
+
         return nbEnregistrement;
     }
+
+    public  boolean validerEnregistrement(int nbEnregistrement){
+        if(nbEnregistrement == 601){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
