@@ -28,15 +28,16 @@ public class CaninetteTest
     public void AfficherListeCani() throws InterruptedException
     {
         window.button(withText("Liste des caninettes")).click();
-        Thread.sleep(2 * 1000);
-
+        window.button(withText("Liste des caninettes")).requireText("Liste des caninettes");
+        Thread.sleep(2000);
     }
 
     @Test
     public void AfficherListeCaniHS() throws InterruptedException
     {
         window.button(withText("Caninettes hors service")).click();
-        Thread.sleep(2 * 1000);
+        window.button(withText("Caninettes hors service")).requireText("Caninettes hors service");
+        Thread.sleep(2000);
 
     }
 
@@ -44,6 +45,7 @@ public class CaninetteTest
     public void bouttonQuitter()
     {
         window.button(withText("Quitter")).click();
+        window.button(withText("Quitter")).requireText("Quitter");
 
     }
 
