@@ -6,10 +6,10 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 class Fenetre extends JFrame implements ActionListener {
@@ -19,8 +19,10 @@ class Fenetre extends JFrame implements ActionListener {
     MapView mapView;
 
     //Constantes
-    private static final double LAT_GVA = 46.20692080361156;
-    private static final double LON_GVA = 6.142971280091718;
+    private static final double LAT_GVA = 46.20692080361156; // Centre de Genève
+    private static final double LON_GVA = 6.142971280091718; // Centre de Genève
+    private static final int SCENE_SIZE_X = 800; // Taille par défaut de la fenêtre
+    private static final int SCENE_SIZE_Y = 700; // Taille par défaut de la fenêtre
     private static final int ZOOM_LEVEL = 15;
 
     public Fenetre(String aTitle) {
@@ -52,7 +54,7 @@ class Fenetre extends JFrame implements ActionListener {
         StackPane stackPane = new StackPane();
         JFXPanel jfxPanel = new JFXPanel();
         add(jfxPanel);
-        Scene scene = new Scene(stackPane, 800, 700);
+        Scene scene = new Scene(stackPane, SCENE_SIZE_X, SCENE_SIZE_Y );
         jfxPanel.setScene(scene);
 
         // create a ArcGISMap

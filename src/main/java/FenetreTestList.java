@@ -1,16 +1,14 @@
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import static com.sun.javafx.fxml.expression.Expression.add;
 
 public class FenetreTestList extends JFrame implements ActionListener{
 
     private DaoCanninettes daoCanninettes;
     //Bouton
-    JButton  btnQuitter;
+    JButton  btnFermer;
     JTextArea listCani;
 
 
@@ -26,9 +24,9 @@ public class FenetreTestList extends JFrame implements ActionListener{
         JPanel jpBas = new JPanel(new BorderLayout());
         add(jpBas, "South");
 
-        btnQuitter = new JButton("Fermer");
-        jpWest.add(btnQuitter);
-        btnQuitter.addActionListener(this);
+         btnFermer = new JButton("Fermer");
+        jpWest.add(btnFermer);
+        btnFermer.addActionListener(this);
 
         listCani = new JTextArea();
         JScrollPane jsp = new JScrollPane(listCani, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
@@ -41,7 +39,7 @@ public class FenetreTestList extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (event.getSource().equals(btnQuitter)) {
+        if (event.getSource().equals(btnFermer)) {
             this.dispose();
         }
     }
