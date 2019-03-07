@@ -39,10 +39,12 @@ class Fenetre extends JFrame implements ActionListener {
         btnConnexion.addActionListener(this);
 
         btnListeCani = new JButton("Liste des caninettes");
+        btnListeCani.setName("btnListeCani");
         jpWest.add(btnListeCani);
         btnListeCani.addActionListener(this);
 
         btnCaninettesHS = new JButton("Caninettes hors service");
+        btnCaninettesHS.setName("btnCaninettesHS");
         jpWest.add(btnCaninettesHS);
         btnCaninettesHS.addActionListener(this);
 

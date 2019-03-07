@@ -27,18 +27,17 @@ public class CaninetteTest
     @Test
     public void AfficherListeCani() throws InterruptedException
     {
-        window.button(withText("Liste des caninettes")).click();
-        window.button(withText("Liste des caninettes")).requireText("Liste des caninettes");
+        window.button("btnListeCani").click();
+        window.button("btnListeCani").requireText("Liste des caninettes");
         Thread.sleep(2000);
     }
 
     @Test
     public void AfficherListeCaniHS() throws InterruptedException
     {
-        window.button(withText("Caninettes hors service")).click();
-        window.button(withText("Caninettes hors service")).requireText("Caninettes hors service");
+        window.button("btnCaninettesHS").click();
+        window.button("btnCaninettesHS").requireText("Caninettes hors service");
         Thread.sleep(2000);
-
     }
 
     @Test
