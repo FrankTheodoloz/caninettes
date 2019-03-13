@@ -15,7 +15,64 @@ public class Caninette {
         this.positionN = positionN;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getEtat() {
+        return etat;
+    }
+
+    public void setEtat(String etat) {
+        this.etat = etat;
+    }
+
+    public String getRemarque() {
+        return remarque;
+    }
+
+    public void setRemarque(String remarque) {
+        this.remarque = remarque;
+    }
+
+    public double getPositionE() {
+        return positionE;
+    }
+
+    public void setPositionE(double positionE) {
+        this.positionE = positionE;
+    }
+
+    public double getPositionN() {
+        return positionN;
+    }
+
+    public void setPositionN(double positionN) {
+        this.positionN = positionN;
+    }
+
     @Override
+
     public String toString() {
         return
                 "Caninette n°: " + id +  "\n" +

@@ -7,7 +7,7 @@ public class CaniCrottes {
 
     }
 
-    public static Fenetre creeFenetre() {
+    public static Fenetre creeFenetre() throws SQLException {
         Fenetre f = new Fenetre("CaniCrottes");
 
         f.pack();
