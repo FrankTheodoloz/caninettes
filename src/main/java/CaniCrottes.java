@@ -1,3 +1,7 @@
+/**
+ * Entry point of the program
+ */
+
 import java.sql.SQLException;
 
 public class CaniCrottes {
@@ -7,8 +11,8 @@ public class CaniCrottes {
 
     }
 
-    public static Fenetre creeFenetre() throws SQLException {
-        Fenetre f = new Fenetre("CaniCrottes");
+    public static MainWindow creeFenetre() throws SQLException {
+        MainWindow f = new MainWindow("CaniCrottes");
 
         f.pack();
         f.setLocationRelativeTo(null);

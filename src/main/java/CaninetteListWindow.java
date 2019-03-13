@@ -4,18 +4,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-public class FenetreTestList extends JFrame implements ActionListener{
+/**
+ * Caninettes List window
+ */
+public class CaninetteListWindow extends JFrame implements ActionListener {
 
-
-    //Bouton
-    JButton  btnFermer;
+    // Buttons
+    JButton btnFermer;
     JTextArea listCani;
 
-
-    public FenetreTestList(String aTitle) throws SQLException {
+    public CaninetteListWindow(String aTitle) throws SQLException {
         setTitle(aTitle);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        DaoCanninettes daoCanninettes = new DaoCanninettes("jdbc:sqlite:mydatabase.db") ;
+        DaoCaninette daoCaninette = new DaoCaninette("jdbc:sqlite:mydatabase.db");
 
         JPanel jpHaut = new JPanel(new BorderLayout());
         add(jpHaut, "North");
@@ -24,7 +25,7 @@ public class FenetreTestList extends JFrame implements ActionListener{
         JPanel jpBas = new JPanel(new BorderLayout());
         add(jpBas, "South");
 
-         btnFermer = new JButton("Fermer");
+        btnFermer = new JButton("Fermer");
         jpWest.add(btnFermer);
         btnFermer.addActionListener(this);
 
@@ -32,7 +33,9 @@ public class FenetreTestList extends JFrame implements ActionListener{
         JScrollPane jsp = new JScrollPane(listCani, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         jsp = new JScrollPane(listCani);
-        listCani.append(daoCanninettes.afficherCaninette().toString());
+
+        // Returns a list of caninettes
+        listCani.append(daoCaninette.displayCaninettes().toString());
         add(jsp, "Center");
 
     }

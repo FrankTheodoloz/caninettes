@@ -1,9 +1,7 @@
 public class Caninette {
-    int id;
-    String adresse, numero,etat, remarque;
-    double positionE,positionN;
-
-
+    private int id;
+    private String adresse, numero, etat, remarque;
+    private double positionE, positionN;
 
     public Caninette(int id, String adresse, String numero, String etat, String remarque, double positionE, double positionN) {
         this.id = id;
@@ -72,16 +70,13 @@ public class Caninette {
     }
 
     @Override
-
     public String toString() {
         return
-                "Caninette n°: " + id +  "\n" +
-                "Adresse: " + adresse +  "\n" +
-                "Numero: " + numero +  "\n" +
-                "Etat: " + etat +  "\n" +
-                "Remarque: " + remarque +  "\n" +
-                        "======================" + "\n"
-                ;
+                "Caninette n°: " + id + "\n" +
+                        "Adresse: " + adresse + "\n" +
+                        "Numero: " + numero + "\n" +
+                        "Etat: " + etat + "\n" +
+                        "Remarque: " + remarque + "\n" +
+                        "======================" + "\n";
     }
-
 }

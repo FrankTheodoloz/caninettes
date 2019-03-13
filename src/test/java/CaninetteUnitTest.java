@@ -20,7 +20,7 @@ public class TestUnitaireCaninette {
         assertEquals(affichageAttendu,caninette.toString());
     }
 
-    /** Test that the method afficherCaninette() create correctly an object Caninette**/
+    /** Test that the method displayCaninettes() create correctly an object Caninette**/
     @Test public void creationCaninette() throws SQLException {
         DaoCanninettes daoCanninettes = new DaoCanninettes("jdbc:sqlite:mydatabaseTest.db");
         String caninetteAttendu = "Caninette n°: 2" +  "\n" +

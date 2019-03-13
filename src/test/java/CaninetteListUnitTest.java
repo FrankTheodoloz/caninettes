@@ -15,7 +15,7 @@ public class TestUnitaireListeCaninette {
         assertEquals(601,nbEnregistrement);
     }
 
-    /** Test the method afficherCaninette() create an entire Caninette list without NULL records**/
+    /** Test the method displayCaninettes() create an entire Caninette list without NULL records**/
     @Test public void vérificationListeCaninette() throws SQLException {
         DaoCanninettes daoCanninettes = new DaoCanninettes("jdbc:sqlite:mydatabaseTest.db");
         ArrayList listeCaninettesAttendues = daoCanninettes.afficherCaninette();

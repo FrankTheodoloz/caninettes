@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.assertj.swing.core.matcher.JButtonMatcher.withText;
 
 
-public class CaninetteTest
+public class CaninetteFunctionnalTest
 {
     private FrameFixture window;
 

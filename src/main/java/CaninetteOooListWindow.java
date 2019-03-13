@@ -1,25 +1,23 @@
-
 import java.awt.event.ActionListener;
-        import java.awt.event.ActionEvent;
-        import javax.swing.*;
-        import java.awt.*;
-        import java.sql.SQLException;
-        import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import javax.swing.*;
+import java.awt.*;
+import java.sql.SQLException;
 
-        import static com.sun.javafx.fxml.expression.Expression.add;
+/**
+ * Out of order Caninettes List window
+ */
+public class CaninetteOooListWindow extends JFrame implements ActionListener {
 
-public class ListeCaninetteHS extends JFrame implements ActionListener {
-
-    private DaoCanninettes daoCanninettes;
+    private DaoCaninette daoCaninette;
     //Bouton
-    JButton  btnQuitter;
+    JButton btnQuitter;
     JTextArea listCaniHs;
 
-
-    public ListeCaninetteHS(String aTitle) throws SQLException {
+    public CaninetteOooListWindow(String aTitle) throws SQLException {
         setTitle(aTitle);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        DaoCanninettes daoCanninettes = new DaoCanninettes("jdbc:sqlite:mydatabase.db") ;
+        DaoCaninette daoCaninette = new DaoCaninette("jdbc:sqlite:mydatabase.db");
 
         JPanel jpHaut = new JPanel(new BorderLayout());
         add(jpHaut, "North");
@@ -36,7 +34,7 @@ public class ListeCaninetteHS extends JFrame implements ActionListener {
         JScrollPane jsp = new JScrollPane(listCaniHs, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         jsp = new JScrollPane(listCaniHs);
-        listCaniHs.append(daoCanninettes.afficherCaninetteHS().toString());
+        listCaniHs.append(daoCaninette.displayOooCaninettes().toString());
         add(jsp, "Center");
 
     }

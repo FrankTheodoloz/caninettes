@@ -1,5 +1,4 @@
 import com.esri.arcgisruntime.concurrent.ListenableFuture;
-import com.esri.arcgisruntime.geometry.GeometryEngine;
 import com.esri.arcgisruntime.geometry.Point;
 import com.esri.arcgisruntime.geometry.SpatialReference;
 import com.esri.arcgisruntime.mapping.ArcGISMap;
@@ -9,7 +8,6 @@ import com.esri.arcgisruntime.mapping.view.GraphicsOverlay;
 import com.esri.arcgisruntime.mapping.view.IdentifyGraphicsOverlayResult;
 import com.esri.arcgisruntime.mapping.view.MapView;
 import com.esri.arcgisruntime.symbology.PictureMarkerSymbol;
-import com.esri.arcgisruntime.symbology.SimpleMarkerSymbol;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.geometry.Point2D;
@@ -29,7 +27,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class Fenetre extends JFrame implements ActionListener {
+/**
+ * Main window that display a map, the caninettes and the menu
+ */
+class MainWindow extends JFrame implements ActionListener {
 
     // Buttons
     JButton btnConnexion, btnCaninettesHS, btnQuitter, btnListeCani;
@@ -55,10 +56,11 @@ class Fenetre extends JFrame implements ActionListener {
     private ListenableFuture<IdentifyGraphicsOverlayResult> identifyGraphics;
 
 
-    public Fenetre(String aTitle) throws SQLException {
+    public MainWindow(String aTitle) throws SQLException {
         setTitle(aTitle);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+        // Window menu set-up
         JPanel jpHaut = new JPanel(new BorderLayout());
         add(jpHaut, "North");
         JPanel jpWest = new JPanel();
@@ -82,49 +84,43 @@ class Fenetre extends JFrame implements ActionListener {
         jpWest.add(btnQuitter);
         btnQuitter.addActionListener(this);
 
-        // create stack pane and application scene
+        // Create stack pane and application scene
         StackPane stackPane = new StackPane();
         JFXPanel jfxPanel = new JFXPanel();
         add(jfxPanel);
-        Scene scene = new Scene(stackPane, SCENE_SIZE_X, SCENE_SIZE_Y );
+        Scene scene = new Scene(stackPane, SCENE_SIZE_X, SCENE_SIZE_Y);
         jfxPanel.setScene(scene);
 
-        // create a ArcGISMap with Location and Zoom settings
+        // Create a ArcGISMap with Location and Zoom settings
         ArcGISMap map = new ArcGISMap(Basemap.Type.TOPOGRAPHIC, LAT_GVA, LON_GVA, ZOOM_LEVEL);
 
-        // set the map to be displayed in this view
+        // Set the map to be displayed in this view
         mapView = new MapView();
 
         setupGraphicsOverlay();
         addPointGraphic();
 
         mapView.setOnMouseClicked(event -> {
-            // check that the primary mouse button was clicked
+            // Check that the primary mouse button was clicked
             if (event.isStillSincePress() && event.getButton() == MouseButton.PRIMARY) {
-                // create a point from where the user clicked
+                // Create a point from where the user clicked
                 Point2D point = new Point2D(event.getX(), event.getY());
 
-                // create a map point from a point
+                // Create a map point from a point
                 com.esri.arcgisruntime.geometry.Point mapPoint = mapView.screenToLocation(point);
 
-                // for a wrapped around map, the point coordinates include the wrapped around value
-                // for a service in projected coordinate system, this wrapped around value has to be normalized
-                com.esri.arcgisruntime.geometry.Point normalizedMapPoint = (Point) GeometryEngine.normalizeCentralMeridian(mapPoint);
-
-                // add a new feature to the service feature table
-//                addFeature(normalizedMapPoint, featureTable);
+                // Add a new feature to the service feature table
                 System.out.println("Click at " + mapPoint.getX() + " " + mapPoint.getY());
             }
         });
 
         mapView.setOnMouseClicked(e -> {
             if (e.getButton() == MouseButton.PRIMARY && e.isStillSincePress()) {
-                // create a point from location clicked
+                // Create a point from location clicked
                 Point2D mapViewPoint = new Point2D(e.getX(), e.getY());
 
-                // identify graphics on the graphics overlay
+                // Identify graphics on the graphics overlay
                 identifyGraphics = mapView.identifyGraphicsOverlayAsync(graphicsOverlay, mapViewPoint, 1, false);
-
                 identifyGraphics.addDoneListener(() -> Platform.runLater(this::createGraphicDialog));
             }
         });
@@ -139,6 +135,11 @@ class Fenetre extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * Menu action
+     *
+     * @param event Event
+     */
     @Override
     public void actionPerformed(ActionEvent event) {
 
@@ -147,9 +148,9 @@ class Fenetre extends JFrame implements ActionListener {
         }
 
         if (event.getSource().equals(btnListeCani)) {
-            FenetreTestList fList = null;
+            CaninetteListWindow fList = null;
             try {
-                fList = new FenetreTestList("La liste de toutes les canninettes");
+                fList = new CaninetteListWindow("La liste de toutes les canninettes");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -159,9 +160,9 @@ class Fenetre extends JFrame implements ActionListener {
         }
 
         if (event.getSource().equals(btnCaninettesHS)) {
-            ListeCaninetteHS fList = null;
+            CaninetteOooListWindow fList = null;
             try {
-                fList = new ListeCaninetteHS("La liste des canninettes hors service");
+                fList = new CaninetteOooListWindow("La liste des canninettes hors service");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -170,13 +171,20 @@ class Fenetre extends JFrame implements ActionListener {
             fList.setVisible(true);
         }
     }
+
+    /**
+     * Create a caninettes list
+     *
+     * @return ArrayList
+     * @throws SQLException e
+     */
     public ArrayList<Caninette> caninettesList() throws SQLException {
 
 
         ArrayList<Caninette> list = new ArrayList<Caninette>();
         try {
-            DaoCanninettes daoCanninettes = new DaoCanninettes("jdbc:sqlite:mydatabase.db");
-            list = daoCanninettes.afficherCaninette();
+            DaoCaninette daoCaninette = new DaoCaninette("jdbc:sqlite:mydatabase.db");
+            list = daoCaninette.displayCaninettes();
 
         } catch (SQLException e) {
             System.out.println("erreur dao" + e);
@@ -185,6 +193,9 @@ class Fenetre extends JFrame implements ActionListener {
         return list;
     }
 
+    /**
+     * Creates a graphic overlay for the points on the map
+     */
     private void setupGraphicsOverlay() {
         if (mapView != null) {
             graphicsOverlay = new GraphicsOverlay();
@@ -192,17 +203,23 @@ class Fenetre extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Adds points to the graphic overlay
+     *
+     * @throws SQLException e
+     */
     private void addPointGraphic() throws SQLException {
         if (graphicsOverlay != null) {
 
-            // create a pin graphic
+            // Create a pin graphic
             javafx.scene.image.Image img = new Image(getClass().getResourceAsStream("pin.png"), 0, 80, true, true);
             pinSymbol = new PictureMarkerSymbol(img);
             pinSymbol.loadAsync();
 
-            SimpleMarkerSymbol pointSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.Style.CIRCLE, hexRed, 5.0f);
-//            pointSymbol.setOutline(new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, hexBlue, 2.0f));
-//            Point point = new Point(-118.29507, 34.13501, SpatialReferences.getWgs84());
+            // Code to display a graphic point (to be kept for probable future use)
+            //SimpleMarkerSymbol pointSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.Style.CIRCLE, hexRed, 5.0f);
+            //pointSymbol.setOutline(new SimpleLineSymbol(SimpleLineSymbol.Style.SOLID, hexBlue, 2.0f));
+            //Point point = new Point(-118.29507, 34.13501, SpatialReferences.getWgs84());
 
             SpatialReference wgs84 = SpatialReference.create(2056);
 
@@ -210,7 +227,6 @@ class Fenetre extends JFrame implements ActionListener {
             String Adresse = "";
             String Description = "";
             Map<String, Object> attributes = null;
-
 
             for (Caninette c : caninettesList()) {
                 lat = c.getPositionN();
@@ -223,29 +239,27 @@ class Fenetre extends JFrame implements ActionListener {
                 attributes.put("Remarque", c.getRemarque());
                 attributes.put("Id", c.getId());
 
-
                 com.esri.arcgisruntime.geometry.Point point = new Point(lon, lat, wgs84);
-//                Graphic pointGraphic = new Graphic(point, attributes, pointSymbol);
+
+                // Graphic pointGraphic = new Graphic(point, attributes, pointSymbol);
                 Graphic pointGraphic = new Graphic(point, attributes, pinSymbol);
                 graphicsOverlay.getGraphics().add(pointGraphic);
             }
-
         }
     }
 
     /**
-     * Indicates when a graphic is clicked by showing an Alert.
+     * Displays a dialog window when a point is clicked
      */
     private void createGraphicDialog() {
 
         try {
-            // get the list of graphics returned by identify
+            // Get the list of graphics returned by identify
             IdentifyGraphicsOverlayResult result = identifyGraphics.get();
             List<Graphic> graphics = result.getGraphics();
 
-
             if (!graphics.isEmpty()) {
-                // show a alert dialog box if a graphic was returned
+                // Show a alert dialog box if a graphic was returned
                 Alert dialog = new Alert(Alert.AlertType.INFORMATION);
                 dialog.initOwner(mapView.getScene().getWindow());
                 dialog.setHeaderText(null);
@@ -260,7 +274,8 @@ class Fenetre extends JFrame implements ActionListener {
                 dialog.showAndWait();
             }
         } catch (Exception e) {
-            // on any error, display the stack trace
+
+            // On any error, display the stack trace
             e.printStackTrace();
         }
     }
