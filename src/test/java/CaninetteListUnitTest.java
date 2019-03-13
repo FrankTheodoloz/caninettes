@@ -1,27 +1,30 @@
-/** **/
 import org.junit.Assert;
 import org.junit.Test;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import static junit.framework.TestCase.assertEquals;
 
-public class TestUnitaireListeCaninette {
+public class CaninetteListUnitTest {
 
-    /** Test the database connection and the number of stored records on a test database**/
-    @Test public void nbEnregistrementValide() throws SQLException {
-        DaoCanninettes daoCanninettes = new DaoCanninettes("jdbc:sqlite:mydatabaseTest.db");
-        int nbEnregistrement = daoCanninettes.afficherCaninette().size();
-        /** Le nombre d'enregistrements de la base de données est de 601**/
-        assertEquals(601,nbEnregistrement);
+    // Test the database connection and the number of stored records on a test database
+    @Test
+    public void validateNumberOfRecords() throws SQLException {
+        DaoCaninette daoCanninettes = new DaoCaninette("jdbc:sqlite:mydatabaseTest.db");
+        int numberOfRecords = daoCanninettes.displayCaninettes().size();
+
+        // Checks that there are 601 caninettes in the db
+        assertEquals(601, numberOfRecords);
     }
 
-    /** Test the method displayCaninettes() create an entire Caninette list without NULL records**/
-    @Test public void vérificationListeCaninette() throws SQLException {
-        DaoCanninettes daoCanninettes = new DaoCanninettes("jdbc:sqlite:mydatabaseTest.db");
-        ArrayList listeCaninettesAttendues = daoCanninettes.afficherCaninette();
-        for (int i = 0; i <listeCaninettesAttendues.size() ; i++) {
-            Assert.assertNotNull(listeCaninettesAttendues.get(i));
+    // Test the method displayCaninettes() create an entire Caninette list without NULL records
+    @Test
+    public void checkCaninetteList() throws SQLException {
+        DaoCaninette daoCanninettes = new DaoCaninette("jdbc:sqlite:mydatabaseTest.db");
+        ArrayList expectedCaninetteList = daoCanninettes.displayCaninettes();
+        for (int i = 0; i < expectedCaninetteList.size(); i++) {
+            Assert.assertNotNull(expectedCaninetteList.get(i));
         }
     }
-
 }

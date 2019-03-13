@@ -7,11 +7,11 @@ import java.sql.SQLException;
 public class CaniCrottes {
 
     public static void main(String[] args) throws SQLException {
-        creeFenetre();
+        createWindow();
 
     }
 
-    public static MainWindow creeFenetre() throws SQLException {
+    public static MainWindow createWindow() throws SQLException {
         MainWindow f = new MainWindow("CaniCrottes");
 
         f.pack();

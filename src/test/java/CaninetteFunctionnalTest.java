@@ -8,11 +8,8 @@ import org.junit.Test;
 
 import static org.assertj.swing.core.matcher.JButtonMatcher.withText;
 
-
-public class CaninetteFunctionnalTest
-{
+public class CaninetteFunctionnalTest {
     private FrameFixture window;
-
 
     @BeforeClass
     public static void setUpOnce() {
@@ -21,33 +18,28 @@ public class CaninetteFunctionnalTest
 
     @Before
     public void setUp() {
-        window = new FrameFixture(GuiActionRunner.execute(CaniCrottes::creeFenetre));
+        window = new FrameFixture(GuiActionRunner.execute(CaniCrottes::createWindow));
     }
 
     @Test
-    public void AfficherListeCani() throws InterruptedException
-    {
+    public void displayCaninettesList() throws InterruptedException {
         window.button("btnListeCani").click();
         window.button("btnListeCani").requireText("Liste des caninettes");
         Thread.sleep(2000);
     }
 
     @Test
-    public void AfficherListeCaniHS() throws InterruptedException
-    {
+    public void displayOooCaninettesList() throws InterruptedException {
         window.button("btnCaninettesHS").click();
         window.button("btnCaninettesHS").requireText("Caninettes hors service");
         Thread.sleep(2000);
     }
 
     @Test
-    public void bouttonQuitter()
-    {
+    public void buttonQuitter() {
         window.button(withText("Quitter")).click();
         window.button(withText("Quitter")).requireText("Quitter");
-
     }
-
 
     @After
     public void tearDown() {

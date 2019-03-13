@@ -48,9 +48,9 @@ class MainWindow extends JFrame implements ActionListener {
     private static final int SCENE_SIZE_X = 800;
     private static final int SCENE_SIZE_Y = 700;
 
-    private int hexRed = 0xFFFF0000;
-    private int hexBlue = 0xFF00FF00;
-    private int hexGreen = 0xFF0000FF;
+    // To be kept for probable future use
+    // private int hexBlue = 0xFF00FF00;
+
     private GraphicsOverlay graphicsOverlay;
     private PictureMarkerSymbol pinSymbol;
     private ListenableFuture<IdentifyGraphicsOverlayResult> identifyGraphics;
