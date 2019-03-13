@@ -19,10 +19,10 @@ class Fenetre extends JFrame implements ActionListener {
     MapView mapView;
 
     //Constantes
-    private static final double LAT_GVA = 46.20692080361156; // Centre de Genève
-    private static final double LON_GVA = 6.142971280091718; // Centre de Genève
-    private static final int SCENE_SIZE_X = 800; // Taille par défaut de la fenêtre
-    private static final int SCENE_SIZE_Y = 700; // Taille par défaut de la fenêtre
+    private static final double LAT_GVA = 46.20692080361156; // Center of Geneva
+    private static final double LON_GVA = 6.142971280091718; // Center of Geneva
+    private static final int SCENE_SIZE_X = 800; // Size of window
+    private static final int SCENE_SIZE_Y = 700; // Size of window
     private static final int ZOOM_LEVEL = 15;
 
     public Fenetre(String aTitle) {
