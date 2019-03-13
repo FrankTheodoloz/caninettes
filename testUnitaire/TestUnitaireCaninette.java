@@ -8,7 +8,7 @@ import static junit.framework.TestCase.assertEquals;
 
 public class TestUnitaireCaninette {
 
-    /** Tester que le toString d'une caninette soit correct**/
+    /** Test that the Caninette's to String is correct**/
     @Test public void affichageCaninette() {
         Caninette caninette = new Caninette(602, "Av. Curé-Baud 14", "2_99", "Posée", "Très belle", 2599865.69, 1112555.36 );
         String affichageAttendu = "Caninette n°: 602" +  "\n" +
@@ -20,7 +20,7 @@ public class TestUnitaireCaninette {
         assertEquals(affichageAttendu,caninette.toString());
     }
 
-    /** Tester que la méthode afficherCaninette() créer correctement une caninette**/
+    /** Test that the method afficherCaninette() create correctly an object Caninette**/
     @Test public void creationCaninette() throws SQLException {
         DaoCanninettes daoCanninettes = new DaoCanninettes("jdbc:sqlite:mydatabaseTest.db");
         String caninetteAttendu = "Caninette n°: 2" +  "\n" +

@@ -12,7 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 
-class FenetreAccueil extends JFrame implements ActionListener {
+class Fenetre extends JFrame implements ActionListener {
 
     //Bouton
     JButton btnConnexion, btnCaninettesHS, btnQuitter, btnListeCani;
@@ -23,7 +23,7 @@ class FenetreAccueil extends JFrame implements ActionListener {
     private static final double LON_GVA = 6.142971280091718;
     private static final int ZOOM_LEVEL = 15;
 
-    public FenetreAccueil(String aTitle) {
+    public Fenetre(String aTitle) {
         setTitle(aTitle);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,9 +76,9 @@ class FenetreAccueil extends JFrame implements ActionListener {
             System.exit(0);
         }
         if (event.getSource().equals(btnListeCani)) {
-            FenetreListeCaninettes fList = null;
+            FenetreTestList fList = null;
             try {
-                fList = new FenetreListeCaninettes("CaniCrottesTestListe");
+                fList = new FenetreTestList("CaniCrottesTestListe");
             } catch (SQLException e) {
                 e.printStackTrace();
             }

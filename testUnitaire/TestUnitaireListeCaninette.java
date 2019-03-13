@@ -7,7 +7,7 @@ import static junit.framework.TestCase.assertEquals;
 
 public class TestUnitaireListeCaninette {
 
-    /** Tester la connexion à la base de données et le nombre d'enregistrements stockés, sur une base de données test**/
+    /** Test the database connection and the number of stored records on a test database**/
     @Test public void nbEnregistrementValide() throws SQLException {
         DaoCanninettes daoCanninettes = new DaoCanninettes("jdbc:sqlite:mydatabaseTest.db");
         int nbEnregistrement = daoCanninettes.afficherCaninette().size();
@@ -15,7 +15,7 @@ public class TestUnitaireListeCaninette {
         assertEquals(601,nbEnregistrement);
     }
 
-    /** Tester que la méthode afficherCaninette() créer une liste entière de caninette sans enregistrements NULL**/
+    /** Test the method afficherCaninette() create an entire Caninette list without NULL records**/
     @Test public void vérificationListeCaninette() throws SQLException {
         DaoCanninettes daoCanninettes = new DaoCanninettes("jdbc:sqlite:mydatabaseTest.db");
         ArrayList listeCaninettesAttendues = daoCanninettes.afficherCaninette();
