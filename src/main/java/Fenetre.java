@@ -6,10 +6,10 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 class Fenetre extends JFrame implements ActionListener {
@@ -19,8 +19,10 @@ class Fenetre extends JFrame implements ActionListener {
     MapView mapView;
 
     //Constantes
-    private static final double LAT_GVA = 46.20692080361156;
-    private static final double LON_GVA = 6.142971280091718;
+    private static final double LAT_GVA = 46.20692080361156; // Center of Geneva
+    private static final double LON_GVA = 6.142971280091718; // Center of Geneva
+    private static final int SCENE_SIZE_X = 800; // Size of window
+    private static final int SCENE_SIZE_Y = 700; // Size of window
     private static final int ZOOM_LEVEL = 15;
 
     public Fenetre(String aTitle) {
@@ -36,13 +38,15 @@ class Fenetre extends JFrame implements ActionListener {
         jpWest.add(btnConnexion);
         btnConnexion.addActionListener(this);
 
-        btnCaninettesHS = new JButton("Caninettes hors service");
-        jpWest.add(btnCaninettesHS);
-        btnCaninettesHS.addActionListener(this);
-
-        btnListeCani = new JButton("Liste Caninettes");
+        btnListeCani = new JButton("Liste des caninettes");
+        btnListeCani.setName("btnListeCani");
         jpWest.add(btnListeCani);
         btnListeCani.addActionListener(this);
+
+        btnCaninettesHS = new JButton("Caninettes hors service");
+        btnCaninettesHS.setName("btnCaninettesHS");
+        jpWest.add(btnCaninettesHS);
+        btnCaninettesHS.addActionListener(this);
 
         btnQuitter = new JButton("Quitter");
         jpWest.add(btnQuitter);
@@ -52,7 +56,7 @@ class Fenetre extends JFrame implements ActionListener {
         StackPane stackPane = new StackPane();
         JFXPanel jfxPanel = new JFXPanel();
         add(jfxPanel);
-        Scene scene = new Scene(stackPane, 800, 700);
+        Scene scene = new Scene(stackPane, SCENE_SIZE_X, SCENE_SIZE_Y );
         jfxPanel.setScene(scene);
 
         // create a ArcGISMap
@@ -72,13 +76,27 @@ class Fenetre extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
+
         if (event.getSource().equals(btnQuitter)) {
             System.exit(0);
         }
+
         if (event.getSource().equals(btnListeCani)) {
             FenetreTestList fList = null;
             try {
-                fList = new FenetreTestList("CaniCrottesTestListe");
+                fList = new FenetreTestList("La liste de toutes les canninettes");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            fList.pack();
+            fList.setLocationRelativeTo(null);
+            fList.setVisible(true);
+        }
+
+        if (event.getSource().equals(btnCaninettesHS)) {
+            ListeCaninetteHS fList = null;
+            try {
+                fList = new ListeCaninetteHS("La liste des canninettes hors service");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
