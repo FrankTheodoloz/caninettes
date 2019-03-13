@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class FenetreTestList extends JFrame implements ActionListener{
 
-    private DaoCanninettes daoCanninettes;
+
     //Bouton
     JButton  btnFermer;
     JTextArea listCani;

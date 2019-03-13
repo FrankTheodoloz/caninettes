@@ -16,7 +16,7 @@ public class DaoCanninettes extends DataBaseConnexion {
 
 
     public ArrayList <Caninette> afficherCaninette() {
-        ArrayList listeCaninette = new ArrayList<Caninette>();
+        ArrayList<Caninette> listeCaninette = new ArrayList<>();
         try
         {
            Statement statement = connection.createStatement();
