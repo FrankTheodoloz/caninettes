@@ -22,7 +22,7 @@ public class DaoAdmin extends DataBaseConnexion {
             while (rs.next()) {
                 // read the result set
                 Admin admin = new Admin(rs.getInt("Adm_id"), rs.getString("Adm_Nom"), rs.getString("Adm_Prenom"), rs.getString("Adm_Login"), rs.getString("Adm_Motdepasse"));
-
+                // A faire champ.getText().equalsadmin.getLogin() etc.
                 if (admin.getLogin().equals("AdminCani") && admin.getMdp().equals("adminMDP")){
                     System.out.println("Vous êtes connecté");
                 }else{
@@ -37,4 +37,5 @@ public class DaoAdmin extends DataBaseConnexion {
         }
 
     }
+
 }

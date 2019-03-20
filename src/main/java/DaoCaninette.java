@@ -13,8 +13,11 @@ public class DaoCaninette extends DataBaseConnexion {
     }
 
     public static void main(String[] args) throws SQLException {
-        DaoCaninette dao = new DaoCaninette("jdbc:sqlite:mydatabase.db");
+        DaoCaninette dao = new DaoCaninette("jdbc:sqlite:mydatabaseTest.db");
         dao.displayCaninettes();
+        //dao.insertCaninette();
+        //dao.updateCaninette();
+        //dao.deleteCaninette();
     }
 
     public ArrayList<Caninette> displayCaninettes() {
@@ -60,5 +63,44 @@ public class DaoCaninette extends DataBaseConnexion {
             System.err.println("Erreur SQL : " + e.getMessage());
         }
         return caninettesOooList;
+    }
+
+    public void insertCaninette(){
+        try {
+            Statement statement = connection.createStatement();
+            String sql = "INSERT INTO Caninettes (Can_Adresse,Can_Numero,Can_Etat,Can_Remarques,Can_PositionE,Can_PositionN) VALUES ('Adresse', 'Numero', 'Etat', 'Remarque', 20.3, 34.2 );";
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            // if the error message is "out of memory",
+            // it probably means no database file is found
+            System.err.println("Erreur SQL : " + e.getMessage());
+        }
+
+    }
+
+    public void updateCaninette(){
+        try {
+            Statement statement = connection.createStatement();
+            String sql = "UPDATE Caninettes SET Can_Etat = 'Travaux' WHERE Can_id = 802;";
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            // if the error message is "out of memory",
+            // it probably means no database file is found
+            System.err.println("Erreur SQL : " + e.getMessage());
+        }
+
+    }
+
+    public void deleteCaninette(){
+        try {
+            Statement statement = connection.createStatement();
+            String sql = "DELETE FROM  Caninettes WHERE Can_id = 800;";
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            // if the error message is "out of memory",
+            // it probably means no database file is found
+            System.err.println("Erreur SQL : " + e.getMessage());
+        }
+
     }
 }
