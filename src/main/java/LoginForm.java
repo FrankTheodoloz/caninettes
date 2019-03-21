@@ -1,13 +1,26 @@
+import sun.applet.Main;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
-public class LoginForm extends JFrame{
+public class LoginForm extends JFrame implements ActionListener {
 
         JPasswordField txtPassword;
         JTextField txtLogin;
-        JButton btnConnexion;
+        JButton btnSignIn;
+        Connexion connexionStatus;
 
-        LoginForm(){
+    /**
+     *  Formulaire de connexion à la base de données
+     * @param connexionStatus : objet chargé de maintenir le status de connexion pour l'utilisateur admin
+     */
+    LoginForm(Connexion connexionStatus){
+
+            this.connexionStatus= connexionStatus;
+
             this.setResizable(false);
             setTitle("Connexion");
             JPanel up = new JPanel();
@@ -25,6 +38,7 @@ public class LoginForm extends JFrame{
             up.add(lblLogin);
 
             txtLogin = new JTextField(20);
+            txtLogin.setName("txtLogin");
             txtLogin.setBounds(100,10,160,25);
             up.add(txtLogin);
 
@@ -33,14 +47,40 @@ public class LoginForm extends JFrame{
             middle.add(lblPassword);
 
             txtPassword = new JPasswordField(20);
-            txtLogin.setBounds(100,10,160,25);
+            txtPassword.setName("txtPassword");
+            txtPassword.setBounds(100,10,160,25);
             middle.add(txtPassword);
 
-            btnConnexion = new JButton("Connexion");
-            down.add(btnConnexion);
+            btnSignIn = new JButton("Connexion");
+            btnSignIn.setName("btnSignIn");
+            btnSignIn.addActionListener(this);
+            down.add(btnSignIn);
 
         }
 
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource().equals(btnSignIn)){
+            try {
+//                if(txtLogin.getText().equals("") || txtPassword.equals("")){
+//
+//                }
+                System.out.println(txtLogin.getText());
+                DaoAdmin log = new DaoAdmin("jdbc:sqlite:mydatabase.db");
+//                log.loginAdmin(txtLogin.getText(), String.valueOf(txtPassword.getPassword()));
+                if(log.loginAdmin(txtLogin.getText(), String.valueOf(txtPassword.getPassword()))){
+                 dispose();
+                 connexionStatus.setConnection();
+
+                } else {
+                 connexionStatus.setDeconnection();
+                }
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        }
     }
+}
 
 

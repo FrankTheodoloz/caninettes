@@ -33,7 +33,9 @@ import java.util.Map;
 class MainWindow extends JFrame implements ActionListener {
 
     // Buttons
+
     JButton btnConnexion, btnCaninettesHS, btnQuitter, btnListeCani;
+    Connexion connexionStatus;
     MapView mapView;
 
     // CONSTANTS
@@ -67,8 +69,11 @@ class MainWindow extends JFrame implements ActionListener {
         jpHaut.add(jpWest, "West");
 
         btnConnexion = new JButton("Connexion");
+        btnConnexion.setName("btnConnexion");
         jpWest.add(btnConnexion);
         btnConnexion.addActionListener(this);
+
+        this.connexionStatus = new Connexion(btnConnexion);
 
         btnListeCani = new JButton("Liste des caninettes");
         btnListeCani.setName("btnListeCani");
@@ -83,6 +88,7 @@ class MainWindow extends JFrame implements ActionListener {
         btnQuitter = new JButton("Quitter");
         jpWest.add(btnQuitter);
         btnQuitter.addActionListener(this);
+
 
         // Create stack pane and application scene
         StackPane stackPane = new StackPane();
@@ -143,10 +149,15 @@ class MainWindow extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource().equals(btnConnexion)) {
-            LoginForm log = new LoginForm();
-            log.pack();
-            log.setLocationRelativeTo(null);
-            log.setVisible(true);
+            if (!connexionStatus.isConnected()) {
+                LoginForm log = new LoginForm(connexionStatus);
+                log.pack();
+                log.setLocationRelativeTo(null);
+                log.setVisible(true);
+
+            } else {
+                connexionStatus.setDeconnection();
+            }
         }
         if (event.getSource().equals(btnQuitter)) {
             System.exit(0);
