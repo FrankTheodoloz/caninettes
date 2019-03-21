@@ -5,6 +5,9 @@ import java.sql.SQLException;
 
 import static junit.framework.TestCase.assertEquals;
 
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+
 public class CaninetteUnitTest {
 
     // Test that the Caninette's to String is correct
@@ -31,6 +34,14 @@ public class CaninetteUnitTest {
                 "Remarque: " + "\n" +
                 "======================" + "\n";
         assertEquals(expectedValue, daoCanninettes.displayCaninettes().get(1).toString());
+    }
+
+    @Test
+    public void checkInsertCaninette() throws SQLException {
+        DaoCaninette daoCanninettes = new DaoCaninette("jdbc:sqlite:mydatabaseTest.db");
+        int testValue = -1;
+
+        assertThat(daoCanninettes.insertCaninette(),not(equalTo(testValue)));
     }
 
 }

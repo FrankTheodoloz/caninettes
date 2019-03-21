@@ -9,10 +9,11 @@ public class DaoAdmin extends DataBaseConnexion {
 
     public static void main(String[] args) throws SQLException {
         DaoAdmin dao = new DaoAdmin("jdbc:sqlite:mydatabase.db");
-        dao.loginAdmin();
+        //System.out.println(dao.loginAdmin("AdminCani", "adminMDP"));
     }
 
-    public void loginAdmin(){
+    public String loginAdmin(String log, String psd){
+        String result = null;
         try {
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);  // set timeout to 30 sec.
@@ -23,10 +24,10 @@ public class DaoAdmin extends DataBaseConnexion {
                 // read the result set
                 Admin admin = new Admin(rs.getInt("Adm_id"), rs.getString("Adm_Nom"), rs.getString("Adm_Prenom"), rs.getString("Adm_Login"), rs.getString("Adm_Motdepasse"));
                 // A faire champ.getText().equalsadmin.getLogin() etc.
-                if (admin.getLogin().equals("AdminCani") && admin.getMdp().equals("adminMDP")){
-                    System.out.println("Vous êtes connecté");
+                if (admin.getLogin().equals(log) && admin.getMdp().equals(psd)){
+                    result = ("Vous êtes connecté");
                 }else{
-                    System.out.println("Vous n'êtes pas Admin");
+                    result = ("Vous n'êtes pas Admin");
                 }
             }
 
@@ -35,7 +36,7 @@ public class DaoAdmin extends DataBaseConnexion {
             // it probably means no database file is found
             System.err.println("Erreur SQL : " + e.getMessage());
         }
-
+        return result;
     }
 
 }

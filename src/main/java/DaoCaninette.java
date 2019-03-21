@@ -14,8 +14,8 @@ public class DaoCaninette extends DataBaseConnexion {
 
     public static void main(String[] args) throws SQLException {
         DaoCaninette dao = new DaoCaninette("jdbc:sqlite:mydatabaseTest.db");
-        dao.displayCaninettes();
-        //dao.insertCaninette();
+        //dao.displayCaninettes();
+        System.out.println(dao.insertCaninette());
         //dao.updateCaninette();
         //dao.deleteCaninette();
     }
@@ -65,17 +65,27 @@ public class DaoCaninette extends DataBaseConnexion {
         return caninettesOooList;
     }
 
-    public void insertCaninette(){
+    public int insertCaninette(){
+        int result = -1;
         try {
             Statement statement = connection.createStatement();
-            String sql = "INSERT INTO Caninettes (Can_Adresse,Can_Numero,Can_Etat,Can_Remarques,Can_PositionE,Can_PositionN) VALUES ('Adresse', 'Numero', 'Etat', 'Remarque', 20.3, 34.2 );";
+            String sql = "INSERT INTO Caninettes (Can_Adresse,Can_Numero,Can_Etat,Can_Remarques,Can_PositionE,Can_PositionN) VALUES ('Adresse', 'Numero', 'Etat', 'Remarque', 20.3, 20.5 );";
             statement.executeUpdate(sql);
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next()){
+                result=rs.getInt(1);
+            }
+
+            //Statement statement1 = connection.createStatement();
+            //String sql1 = "SELECT last_row_id";
+            //result = statement1.executeUpdate(sql1);
+
         } catch (SQLException e) {
             // if the error message is "out of memory",
             // it probably means no database file is found
             System.err.println("Erreur SQL : " + e.getMessage());
         }
-
+        return result;
     }
 
     public void updateCaninette(){
