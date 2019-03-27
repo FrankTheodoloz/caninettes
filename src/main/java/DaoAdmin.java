@@ -12,6 +12,7 @@ public class DaoAdmin extends DataBaseConnexion {
         //System.out.println(dao.loginAdmin("AdminCani", "adminMDP"));
     }
 
+
     public String loginAdmin(String log, String psd){
         String result = null;
         try {
