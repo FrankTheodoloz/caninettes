@@ -38,7 +38,7 @@ public class LoginForm extends JFrame implements ActionListener {
             up.add(lblLogin);
 
             txtLogin = new JTextField(20);
-            txtLogin.setName("txtLogin");
+            txtLogin.setName("log");
             txtLogin.setBounds(100,10,160,25);
             up.add(txtLogin);
 
@@ -47,7 +47,7 @@ public class LoginForm extends JFrame implements ActionListener {
             middle.add(lblPassword);
 
             txtPassword = new JPasswordField(20);
-            txtPassword.setName("txtPassword");
+            txtPassword.setName("Password");
             txtPassword.setBounds(100,10,160,25);
             middle.add(txtPassword);
 
