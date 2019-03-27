@@ -52,11 +52,11 @@ class MainWindow extends JFrame implements ActionListener {
 
     // To be kept for probable future use
     // private int hexBlue = 0xFF00FF00;
+    private static final String EDIT_WINDOW_TITLE = "Formulaire d'étition";
 
     private GraphicsOverlay graphicsOverlay;
     private PictureMarkerSymbol pinSymbol;
     private ListenableFuture<IdentifyGraphicsOverlayResult> identifyGraphics;
-
 
     public MainWindow(String aTitle) throws SQLException {
         setTitle(aTitle);
@@ -127,7 +127,7 @@ class MainWindow extends JFrame implements ActionListener {
 
                 // Identify graphics on the graphics overlay
                 identifyGraphics = mapView.identifyGraphicsOverlayAsync(graphicsOverlay, mapViewPoint, 1, false);
-                identifyGraphics.addDoneListener(() -> Platform.runLater(this::createGraphicDialog));
+                identifyGraphics.addDoneListener(() -> Platform.runLater(this::openDialog));
             }
         });
 
@@ -138,6 +138,7 @@ class MainWindow extends JFrame implements ActionListener {
         Platform.runLater(() -> {
             stackPane.getChildren().addAll(mapView);
         });
+
 
     }
 
@@ -195,18 +196,8 @@ class MainWindow extends JFrame implements ActionListener {
      * @throws SQLException e
      */
     public ArrayList<Caninette> caninettesList() throws SQLException {
-
-
-        ArrayList<Caninette> list = new ArrayList<Caninette>();
-        try {
-            DaoCaninette daoCaninette = new DaoCaninette("jdbc:sqlite:mydatabase.db");
-            list = daoCaninette.displayCaninettes();
-
-        } catch (SQLException e) {
-            System.out.println("erreur dao" + e);
-        }
-
-        return list;
+        DaoCaninette daoCani = new DaoCaninette("jdbc:sqlite:mydatabaseTest.db");
+        return daoCani.displayCaninettes();
     }
 
     /**
@@ -267,7 +258,7 @@ class MainWindow extends JFrame implements ActionListener {
     /**
      * Displays a dialog window when a point is clicked
      */
-    private void createGraphicDialog() {
+    private void openDialog() {
 
         try {
             // Get the list of graphics returned by identify
@@ -276,18 +267,30 @@ class MainWindow extends JFrame implements ActionListener {
 
             if (!graphics.isEmpty()) {
                 // Show a alert dialog box if a graphic was returned
-                Alert dialog = new Alert(Alert.AlertType.INFORMATION);
-                dialog.initOwner(mapView.getScene().getWindow());
-                dialog.setHeaderText(null);
-                dialog.setTitle("Information Dialog Sample");
-                dialog.setContentText("Id : " + graphics.get(0).getAttributes().get("Id")
-                        + "\nAdresse : " + graphics.get(0).getAttributes().get("Adresse")
-                        + "\nEtat : " + graphics.get(0).getAttributes().get("Etat")
-                        + "\nRemarque : " + graphics.get(0).getAttributes().get("Remarque")
-                        + "\nNumero : " + graphics.get(0).getAttributes().get("Numero")
-                );
+                //Alert dialog = new Alert(Alert.AlertType.INFORMATION);
+                //dialog.initOwner(mapView.getScene().getWindow());
+                //dialog.setHeaderText(null);
+                //dialog.setTitle("Information Dialog Sample");
+                //dialog.setContentText("Id : " + graphics.get(0).getAttributes().get("Id")
+                //        + "\nAdresse : " + graphics.get(0).getAttributes().get("Adresse")
+                //        + "\nEtat : " + graphics.get(0).getAttributes().get("Etat")
+                //        + "\nRemarque : " + graphics.get(0).getAttributes().get("Remarque")
+                //        + "\nNumero : " + graphics.get(0).getAttributes().get("Numero")
+                //);
+                //
+                //dialog.showAndWait();
 
-                dialog.showAndWait();
+                // Show a alert dialog box if a graphic was returned
+                EditForm editform = new EditForm(EDIT_WINDOW_TITLE, connexionStatus.isConnected());
+
+                editform.setId(Integer.parseInt(graphics.get(0).getAttributes().get("Id").toString()));
+                editform.setAddress(graphics.get(0).getAttributes().get("Adresse").toString());
+                editform.setStatus(graphics.get(0).getAttributes().get("Etat").toString());
+                editform.setNote(graphics.get(0).getAttributes().get("Remarque").toString());
+                editform.setNumber(graphics.get(0).getAttributes().get("Numero").toString());
+                System.out.println("numéro de la caninette" + graphics.get(0).getAttributes().get("Numero").toString());
+
+                editform.setVisible(true);
             }
         } catch (Exception e) {
 
