@@ -6,7 +6,11 @@ import static junit.framework.TestCase.assertEquals;
 
 public class AdminUnitTest {
 
-    //Test that the method loginAdmin() works correctly when the password and the login are correct
+    /**
+     * Test loginAdmin() method when login and password are correct
+     *
+     * @throws SQLException SQLException
+     */
     @Test
     public void checkLoginAdmin() throws SQLException {
         DaoAdmin dao = new DaoAdmin(CaniCrottes.getSqliteConnection(true));

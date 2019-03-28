@@ -13,7 +13,7 @@ import static org.assertj.swing.finder.WindowFinder.findFrame;
 import static org.assertj.swing.core.matcher.JButtonMatcher.withText;
 import static org.assertj.swing.finder.WindowFinder.findFrame;
 
-public class ConnexionFunctionnalTest {
+public class ConnectionFunctionnalTest {
     private FrameFixture window;
 
     @BeforeClass
@@ -34,7 +34,7 @@ public class ConnexionFunctionnalTest {
     @Test
     public void Connexion() throws InterruptedException {
         window.button("btnConnexion").click();
-        window.button("btnConnexion").requireText("Connexion");
+        window.button("btnConnexion").requireText("Connection");
 
         FrameFixture loginFrame = findFrame(LoginForm.class).using(window.robot());
 
@@ -53,7 +53,7 @@ public class ConnexionFunctionnalTest {
     @Test
     public void FailConnexion() throws InterruptedException {
         window.button("btnConnexion").click();
-        window.button("btnConnexion").requireText("Connexion");
+        window.button("btnConnexion").requireText("Connection");
 
         //Change frame
         FrameFixture loginFrame = findFrame(LoginForm.class).using(window.robot());
@@ -61,7 +61,7 @@ public class ConnexionFunctionnalTest {
         loginFrame.textBox("txtLogin").enterText("Fail");
         loginFrame.textBox("txtPassword").enterText("adminMDP");
         loginFrame.button("btnSignIn").click();
-        loginFrame.button("btnSignIn").requireText("Connexion");
+        loginFrame.button("btnSignIn").requireText("Connection");
         Thread.sleep(2000);
     }
 

@@ -61,7 +61,7 @@ class MainWindow extends JFrame implements ActionListener {
 
     private ProgressIndicator progressIndicator;
     private LocatorTask locatorTask;
-    private Connexion connexionStatus;
+    private Connection connectionStatus;
     private MapView mapView;
 
     MainWindow(String aTitle) {
@@ -74,12 +74,12 @@ class MainWindow extends JFrame implements ActionListener {
         JPanel jpWest = new JPanel();
         jpHaut.add(jpWest, "West");
 
-        btnConnexion = new JButton("Connexion");
+        btnConnexion = new JButton("Connection");
         btnConnexion.setName("btnConnexion");
         jpWest.add(btnConnexion);
         btnConnexion.addActionListener(this);
 
-        this.connexionStatus = new Connexion(btnConnexion);
+        this.connectionStatus = new Connection(btnConnexion);
 
         btnListeCani = new JButton("Liste des caninettes");
         btnListeCani.setName("btnListeCani");
@@ -139,7 +139,7 @@ class MainWindow extends JFrame implements ActionListener {
                 identifyGraphics.addDoneListener(() -> Platform.runLater(this::openDialog));
 
                 // Right mouse button if connected
-            } else if (e.getButton() == MouseButton.SECONDARY && e.isStillSincePress() && connexionStatus.isConnected()) {
+            } else if (e.getButton() == MouseButton.SECONDARY && e.isStillSincePress() && connectionStatus.isConnected()) {
 
                 /* Projection (conversion) of a map point to WKID 2056 instead of WKID 3857
                  * http://spatialreference.org/ref/epsg/ch1903-lv95/
@@ -147,7 +147,7 @@ class MainWindow extends JFrame implements ActionListener {
                  * https://developers.arcgis.com/java/latest/sample-code/project.htm
                  * https://epsg.io/transform#s_srs=2056&t_srs=4326&x=2500066.3000000&y=1118127.1500000
                  */
-//                DecimalFormat decimalFormat = new DecimalFormat("#.00000");
+
                 Point2D point2D = new Point2D(e.getX(), e.getY());
 
                 // get clicked location on the map
@@ -191,7 +191,7 @@ class MainWindow extends JFrame implements ActionListener {
                                     progressIndicator.setVisible(false);
 
                                     // Show the EditForm with the details filled in
-                                    EditForm editform = new EditForm(EDIT_WINDOW_TITLE, connexionStatus.isConnected(), true);
+                                    EditForm editform = new EditForm(EDIT_WINDOW_TITLE, connectionStatus.isConnected(), true);
                                     editform.setAddress(street);
                                     editform.setLatitude(py);
                                     editform.setLongitude(px);
@@ -215,7 +215,7 @@ class MainWindow extends JFrame implements ActionListener {
             }
         });
 
-        // add map view and progress indicator to stack pane
+        // Add map view and progress indicator to stack pane
         Platform.runLater(() -> {
             stackPane.getChildren().addAll(mapView, progressIndicator);
             StackPane.setAlignment(progressIndicator, Pos.CENTER);
@@ -230,14 +230,14 @@ class MainWindow extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource().equals(btnConnexion)) {
-            if (!connexionStatus.isConnected()) {
-                LoginForm log = new LoginForm(connexionStatus);
+            if (!connectionStatus.isConnected()) {
+                LoginForm log = new LoginForm(connectionStatus);
                 log.pack();
                 log.setLocationRelativeTo(null);
                 log.setVisible(true);
 
             } else {
-                connexionStatus.setDeconnection();
+                connectionStatus.setDeconnection();
             }
         }
         if (event.getSource().equals(btnQuitter)) {
@@ -354,7 +354,7 @@ class MainWindow extends JFrame implements ActionListener {
             if (!graphics.isEmpty()) {
 
                 // Shows the EditForm if a graphic was returned
-                EditForm editform = new EditForm(EDIT_WINDOW_TITLE, connexionStatus.isConnected(), false);
+                EditForm editform = new EditForm(EDIT_WINDOW_TITLE, connectionStatus.isConnected(), false);
 
                 editform.setId(Integer.parseInt(graphics.get(0).getAttributes().get("Id").toString()));
                 editform.setAddress(graphics.get(0).getAttributes().get("Adresse").toString());

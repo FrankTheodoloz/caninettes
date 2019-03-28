@@ -5,22 +5,22 @@ import java.sql.SQLException;
 
 public class LoginForm extends JFrame implements ActionListener {
 
-    JPasswordField txtPassword;
-    JTextField txtLogin;
-    JButton btnSignIn;
-    Connexion connexionStatus;
+    private JPasswordField txtPassword;
+    private JTextField txtLogin;
+    private JButton btnSignIn;
+    private Connection connectionStatus;
 
     /**
-     * login form to the database
+     * Login form
      *
-     * @param connexionStatus : object responsible for maintaining the login status for the admin user
+     * @param connectionStatus Connection : object responsible for maintaining the login status for the admin user
      */
-    LoginForm(Connexion connexionStatus) {
+    LoginForm(Connection connectionStatus) {
 
-        this.connexionStatus = connexionStatus;
+        this.connectionStatus = connectionStatus;
 
         this.setResizable(false);
-        setTitle("Connexion");
+        setTitle("Connection");
         JPanel up = new JPanel();
         add(up, "North");
 
@@ -29,7 +29,6 @@ public class LoginForm extends JFrame implements ActionListener {
 
         JPanel down = new JPanel();
         add(down, "South");
-
 
         JLabel lblLogin = new JLabel("Login :        ");
         lblLogin.setBounds(10, 10, 80, 25);
@@ -49,13 +48,11 @@ public class LoginForm extends JFrame implements ActionListener {
         txtPassword.setBounds(100, 10, 160, 25);
         middle.add(txtPassword);
 
-        btnSignIn = new JButton("Connexion");
+        btnSignIn = new JButton("Connection");
         btnSignIn.setName("btnSignIn");
         btnSignIn.addActionListener(this);
         down.add(btnSignIn);
-
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -65,9 +62,9 @@ public class LoginForm extends JFrame implements ActionListener {
                 DaoAdmin log = new DaoAdmin(CaniCrottes.getSqliteConnection(false));
                 if (log.loginAdmin(txtLogin.getText(), String.valueOf(txtPassword.getPassword()))) {
                     dispose();
-                    connexionStatus.setConnection();
+                    connectionStatus.setConnection();
                 } else {
-                    connexionStatus.setDeconnection();
+                    connectionStatus.setDeconnection();
                 }
             } catch (SQLException e1) {
                 e1.printStackTrace();

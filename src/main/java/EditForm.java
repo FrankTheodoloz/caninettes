@@ -45,9 +45,7 @@ public class EditForm extends JFrame implements ActionListener {
 
     // Values
     private Integer id;
-    //    private String address;
     private String status;
-    //    private String note;
     private String number;
     private double longitude;
     private double latitude;
@@ -237,7 +235,6 @@ public class EditForm extends JFrame implements ActionListener {
                             toastMessage.setVisible(true);
                         }
                     } else {
-                        //    public int updateCaninette(int id, String etat, String adresse, String numero, String remarques) {
                         if (daoCaninette.updateCaninette(id, statusComboBox.getSelectedItem().toString(), addressEditTextField.getText(), numberEditTextField.getText(), noteEditTextField.getText()) >= 0) {
                             ToastMessage toastMessage = new ToastMessage(UPDATE_SUCCESS_MSG, 3000);
                             MainWindow.refreshMap();

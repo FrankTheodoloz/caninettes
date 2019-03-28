@@ -11,7 +11,9 @@ import static org.hamcrest.CoreMatchers.*;
 public class CaninetteUnitTest {
 
 
-    // Test that the Caninette's to String is correct
+    /**
+     * Test that the Caninette's to String is correct
+     */
     @Test
     public void checkDisplayCaninette() {
         Caninette caninette = new Caninette(602, "Av. Curé-Baud 14", "2_99", "Posée", "Très belle", 2599865.69, 1112555.36);
@@ -24,7 +26,11 @@ public class CaninetteUnitTest {
         assertEquals(expectedValue, caninette.toString());
     }
 
-    // Test that the method displayCaninettes() create correctly an object Caninette
+    /**
+     * Test displayCaninettes() method, creates correctly an object Caninette
+     *
+     * @throws SQLException SQLException
+     */
     @Test
     public void checkCaninetteObjectCreation() throws SQLException {
         DaoCaninette daoCanninettes = new DaoCaninette("jdbc:sqlite:mydatabaseTest.db");
@@ -37,7 +43,11 @@ public class CaninetteUnitTest {
         assertEquals(expectedValue, daoCanninettes.displayCaninettes().get(1).toString());
     }
 
-    // Test that the method checkInsertCaninette() insert a caninette thanks to the return from the method
+    /**
+     * Test checkInsertCaninette() method, inserts a caninette test the return value of the method
+     *
+     * @throws SQLException SQLException
+     */
     @Test
     public void checkInsertCaninette() throws SQLException {
         DaoCaninette daoCanninettes = new DaoCaninette(CaniCrottes.getSqliteConnection(true));
@@ -46,15 +56,23 @@ public class CaninetteUnitTest {
         assertThat(daoCanninettes.insertCaninette("Adresse", "344", "Posée", "", 26.4, 27.4), not(equalTo(testValue)));
     }
 
-    // Test that the method checkUpdateCaninette() update a caninette thanks to the return(statement.executeUpdate()) from the method
+    /**
+     * Test checkUpdateCaninette() method, update a caninette test the return value of the method (statement.executeUpdate())
+     *
+     * @throws SQLException SQLException
+     */
     @Test
     public void checkUpdateCaninette() throws SQLException {
         DaoCaninette daoCanninettes = new DaoCaninette(CaniCrottes.getSqliteConnection(true));
         int expectedResult = 1;
-        assertEquals(expectedResult, daoCanninettes.updateCaninette(1, "Posée","Pont du Pont-Blanc","1","Au milieu du pont"));
+        assertEquals(expectedResult, daoCanninettes.updateCaninette(1, "Posée", "Pont du Pont-Blanc", "1", "Au milieu du pont"));
     }
 
-    // Test that the method checkDeleteCaninette() delete a caninette thanks to the return(statement.executeUpdate()) from the method
+    /**
+     * Test checkDeleteCaninette() method, deletes a caninette and test the return value of the method (statement.executeUpdate())
+     *
+     * @throws SQLException SQLException
+     */
     @Test
     public void checkDeleteCaninette() throws SQLException {
         DaoCaninette daoCanninettes = new DaoCaninette(CaniCrottes.getSqliteConnection(true));

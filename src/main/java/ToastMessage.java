@@ -7,7 +7,8 @@ class ToastMessage extends JDialog {
     int miliseconds;
 
     /**
-     * Toast inspired by : https://stackoverflow.com/questions/10161149/android-like-toast-in-swing
+     * Toast inspired by
+     * https://stackoverflow.com/questions/10161149/android-like-toast-in-swing
      *
      * @param toastString String
      * @param time        int
@@ -28,7 +29,6 @@ class ToastMessage extends JDialog {
         toastLabel.setForeground(Color.WHITE);
 
         setBounds(100, 100, toastLabel.getPreferredSize().width + 20, 31);
-
 
         setAlwaysOnTop(true);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

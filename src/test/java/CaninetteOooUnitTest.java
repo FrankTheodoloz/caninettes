@@ -7,7 +7,9 @@ import static junit.framework.TestCase.assertEquals;
 
 public class CaninetteOooUnitTest {
 
-    // Test that the Caninette's to String is correct
+    /**
+     * Test that the Caninette's to String is correct
+     */
     @Test
     public void checkDisplayOooCaninette() {
         Caninette caninette = new Caninette(602, "Av. Curé-Baud 14", "2_99", "HS", "Très belle", 2599865.69, 1112555.36);
@@ -20,7 +22,11 @@ public class CaninetteOooUnitTest {
         assertEquals(expectedValue, caninette.toString());
     }
 
-    // Test that the method displayOooCaninettes() create correctly an object Caninette
+    /**
+     * Test displayOooCaninettes() method, creates correctly an object Caninette
+     *
+     * @throws SQLException SQLException
+     */
     @Test
     public void checkCaninetteOooObjectCreation() throws SQLException {
         DaoCaninette daoCaninette = new DaoCaninette(CaniCrottes.getSqliteConnection(true));

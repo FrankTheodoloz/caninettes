@@ -5,10 +5,10 @@ import java.sql.SQLException;
 /**
  * Connection to the SQLlite db
  */
-public class DataBaseConnexion {
+public class DataBaseConnection {
     public Connection connection;
 
-    public DataBaseConnexion(String urlDb) throws SQLException {
+    public DataBaseConnection(String urlDb) throws SQLException {
         connection = DriverManager.getConnection(urlDb);
     }
 }

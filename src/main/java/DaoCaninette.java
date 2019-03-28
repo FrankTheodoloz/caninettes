@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * DAO Caninettes to access to the db records
  */
-public class DaoCaninette extends DataBaseConnexion {
+public class DaoCaninette extends DataBaseConnection {
 
     public DaoCaninette(String urlDb) throws SQLException {
         super(urlDb);
@@ -54,7 +54,7 @@ public class DaoCaninette extends DataBaseConnexion {
      *
      * @return ArrayList
      */
-    public ArrayList<Caninette> displayOooCaninettes() {
+    ArrayList<Caninette> displayOooCaninettes() {
         ArrayList caninettesOooList = new ArrayList<Caninette>();
         try {
             Statement statement = connection.createStatement();

@@ -2,20 +2,12 @@ public class Admin {
     private int id;
     private String nom, prenom, login, mdp;
 
-    @Override
-    public String toString() {
-        return "Admin: " +
-                " login='" + login + '\'' +
-                " mdp='" + mdp + '\''
-                ;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
+    public Admin(int id, String nom, String prenom, String login, String mdp) {
         this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.login = login;
+        this.mdp = mdp;
     }
 
     public String getNom() {
@@ -50,11 +42,11 @@ public class Admin {
         this.mdp = mdp;
     }
 
-    public Admin(int id, String nom, String prenom, String login, String mdp) {
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.login = login;
-        this.mdp = mdp;
+    @Override
+    public String toString() {
+        return "Admin: " +
+                " login='" + login + '\'' +
+                " mdp='" + mdp + '\''
+                ;
     }
 }

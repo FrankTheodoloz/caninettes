@@ -2,13 +2,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-class DaoAdmin extends DataBaseConnexion {
+class DaoAdmin extends DataBaseConnection {
 
     DaoAdmin(String urlDb) throws SQLException {
         super(urlDb);
     }
 
     /**
+     * Admin login process that compare the user and pwd with the db
+     *
      * @param login    String
      * @param password String
      * @return boolean
