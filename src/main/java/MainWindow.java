@@ -142,7 +142,12 @@ class MainWindow extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent event) {
-
+        if (event.getSource().equals(btnConnexion)) {
+            LoginForm log = new LoginForm();
+            log.pack();
+            log.setLocationRelativeTo(null);
+            log.setVisible(true);
+        }
         if (event.getSource().equals(btnQuitter)) {
             System.exit(0);
         }
