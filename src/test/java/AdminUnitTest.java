@@ -9,10 +9,10 @@ public class AdminUnitTest {
     //Test that the method loginAdmin() works correctly when the password and the login are correct
     @Test
     public void checkLoginAdmin() throws SQLException {
-        DaoAdmin dao = new DaoAdmin("jdbc:sqlite:mydatabase.db");
+        DaoAdmin dao = new DaoAdmin(CaniCrottes.getSqliteConnection(true));
         String loginTested = "AdminCani";
         String pwdTested = "adminMDP";
-        String expectedValue = "Vous êtes connecté";
+        boolean expectedValue = true;
         assertEquals(expectedValue, dao.loginAdmin(loginTested, pwdTested));
     }
 

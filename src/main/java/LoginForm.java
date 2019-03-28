@@ -19,7 +19,6 @@ public class LoginForm extends JFrame implements ActionListener {
 
         this.connexionStatus = connexionStatus;
 
-
         this.setResizable(false);
         setTitle("Connexion");
         JPanel up = new JPanel();
@@ -63,7 +62,7 @@ public class LoginForm extends JFrame implements ActionListener {
         if (e.getSource().equals(btnSignIn)) {
             try {
                 System.out.println(txtLogin.getText());
-                DaoAdmin log = new DaoAdmin("jdbc:sqlite:mydatabase.db");
+                DaoAdmin log = new DaoAdmin(CaniCrottes.getSqliteConnection(false));
                 if (log.loginAdmin(txtLogin.getText(), String.valueOf(txtPassword.getPassword()))) {
                     dispose();
                     connexionStatus.setConnection();

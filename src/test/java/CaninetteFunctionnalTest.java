@@ -21,6 +21,11 @@ public class CaninetteFunctionnalTest {
         window = new FrameFixture(GuiActionRunner.execute(CaniCrottes::createWindow));
     }
 
+    /**
+     * Test display window caninette list
+     *
+     * @throws InterruptedException InterruptedException
+     */
     @Test
     public void displayCaninettesList() throws InterruptedException {
         window.button("btnListeCani").click();
@@ -28,6 +33,11 @@ public class CaninetteFunctionnalTest {
         Thread.sleep(2000);
     }
 
+    /**
+     * Test display window caninette out of order list
+     *
+     * @throws InterruptedException InterruptedException
+     */
     @Test
     public void displayOooCaninettesList() throws InterruptedException {
         window.button("btnCaninettesHS").click();
@@ -35,6 +45,9 @@ public class CaninetteFunctionnalTest {
         Thread.sleep(2000);
     }
 
+    /***
+     * Exit button for tse automated tests
+     */
     @Test
     public void buttonQuitter() {
         window.button(withText("Quitter")).click();

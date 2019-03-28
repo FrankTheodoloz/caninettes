@@ -23,7 +23,7 @@ public class CaninetteOooUnitTest {
     // Test that the method displayOooCaninettes() create correctly an object Caninette
     @Test
     public void checkCaninetteOooObjectCreation() throws SQLException {
-        DaoCaninette daoCaninette = new DaoCaninette("jdbc:sqlite:mydatabaseTest.db");
+        DaoCaninette daoCaninette = new DaoCaninette(CaniCrottes.getSqliteConnection(true));
         String expectedValue = "Caninette n°: 474" + "\n" +
                 "Adresse: Rue Charles-GALLAND" + "\n" +
                 "Numero: 4_14" + "\n" +

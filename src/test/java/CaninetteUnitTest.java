@@ -1,11 +1,7 @@
 
-import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -44,7 +40,7 @@ public class CaninetteUnitTest {
     // Test that the method checkInsertCaninette() insert a caninette thanks to the return from the method
     @Test
     public void checkInsertCaninette() throws SQLException {
-        DaoCaninette daoCanninettes = new DaoCaninette("jdbc:sqlite:mydatabaseTest.db");
+        DaoCaninette daoCanninettes = new DaoCaninette(CaniCrottes.getSqliteConnection(true));
         int testValue = -1;
 
         assertThat(daoCanninettes.insertCaninette("Adresse", "344", "Posée", "", 26.4, 27.4), not(equalTo(testValue)));
@@ -53,15 +49,15 @@ public class CaninetteUnitTest {
     // Test that the method checkUpdateCaninette() update a caninette thanks to the return(statement.executeUpdate()) from the method
     @Test
     public void checkUpdateCaninette() throws SQLException {
-        DaoCaninette daoCanninettes = new DaoCaninette("jdbc:sqlite:mydatabaseTest.db");
+        DaoCaninette daoCanninettes = new DaoCaninette(CaniCrottes.getSqliteConnection(true));
         int expectedResult = 1;
-        assertEquals(expectedResult, daoCanninettes.updateCaninette(1, "Posée"));
+        assertEquals(expectedResult, daoCanninettes.updateCaninette(1, "Posée","Pont du Pont-Blanc","1","Au milieu du pont"));
     }
 
     // Test that the method checkDeleteCaninette() delete a caninette thanks to the return(statement.executeUpdate()) from the method
     @Test
     public void checkDeleteCaninette() throws SQLException {
-        DaoCaninette daoCanninettes = new DaoCaninette("jdbc:sqlite:mydatabaseTest.db");
+        DaoCaninette daoCanninettes = new DaoCaninette(CaniCrottes.getSqliteConnection(true));
         int expectedResult = 1;
         int idTested = daoCanninettes.insertCaninette("AdresseTest", "344", "Posée", "", 26.4, 27.4);
         assertEquals(expectedResult, daoCanninettes.deleteCaninette(idTested));

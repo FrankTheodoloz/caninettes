@@ -9,7 +9,6 @@ import java.sql.SQLException;
  */
 public class CaninetteOooListWindow extends JFrame implements ActionListener {
 
-    private DaoCaninette daoCaninette;
     //Bouton
     JButton btnQuitter;
     JTextArea listCaniHs;
@@ -17,7 +16,7 @@ public class CaninetteOooListWindow extends JFrame implements ActionListener {
     public CaninetteOooListWindow(String aTitle) throws SQLException {
         setTitle(aTitle);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        DaoCaninette daoCaninette = new DaoCaninette("jdbc:sqlite:mydatabase.db");
+        DaoCaninette daoCaninette = new DaoCaninette(CaniCrottes.getSqliteConnection(false));
 
         JPanel jpHaut = new JPanel(new BorderLayout());
         add(jpHaut, "North");

@@ -21,7 +21,11 @@ public class DaoCaninette extends DataBaseConnexion {
         System.out.println(dao.deleteCaninette(836));
     }
 
-    //Méthod that allow to display all caninettes
+    /**
+     * Method that allow to display all caninettes
+     *
+     * @return ArrayList
+     */
     public ArrayList<Caninette> displayCaninettes() {
         ArrayList<Caninette> caninetteList = new ArrayList<>();
         try {
@@ -45,30 +49,11 @@ public class DaoCaninette extends DataBaseConnexion {
         return caninetteList;
     }
 
-<<<<<<< HEAD
-    public Caninette getCaninette(Integer id) {
-        Caninette caninette = null;
-        try {
-            Statement statement = connection.createStatement();
-            statement.setQueryTimeout(30);  // set timeout to 30 sec.
-
-            ResultSet rs = statement.executeQuery("select * from Caninettes where Can_id = " + id);
-
-            while (rs.next()) {
-                // read the result set
-                caninette = new Caninette(rs.getInt("Can_id"), rs.getString("Can_adresse"), rs.getString("Can_numero"), rs.getString("Can_etat"), rs.getString("Can_remarques"), rs.getDouble("Can_positionE"), rs.getDouble("Can_positionN"));
-            }
-        } catch (SQLException e) {
-            // If the error message is "out of memory",
-            // It probably means no database file is found
-            System.err.println("Erreur SQL : " + e.getMessage());
-        }
-        return caninette;
-    }
-
-=======
-    //Méthod that allow to display out of order caninettes
->>>>>>> 17e033ba3480eaae5c522fa9d693989fb2dba8ae
+    /**
+     * Method that allow to display out of order caninettes
+     *
+     * @return ArrayList
+     */
     public ArrayList<Caninette> displayOooCaninettes() {
         ArrayList caninettesOooList = new ArrayList<Caninette>();
         try {
@@ -91,21 +76,18 @@ public class DaoCaninette extends DataBaseConnexion {
         return caninettesOooList;
     }
 
-<<<<<<< HEAD
-    // Mirko m' aidé à utiliser preparedStatement sur la méthode insertCaninette()
-=======
-    //Mirko helped me to use preparedStatement in the method insertCaninette()
-    //Method that allow to insert a caninette on database
     /**
-     * @param adresse
-     * @param numero
-     * @param etat
-     * @param remarques
-     * @param positionE
-     * @param positionN
-     * @return
+     * Method that allow to insert a caninette on database
+     * Mirko helped me to use preparedStatement in the method insertCaninette()
+     *
+     * @param adresse   String
+     * @param numero    String
+     * @param etat      String
+     * @param remarques String
+     * @param positionE double
+     * @param positionN double
+     * @return int
      */
->>>>>>> 17e033ba3480eaae5c522fa9d693989fb2dba8ae
     public int insertCaninette(String adresse, String numero, String etat, String remarques, double positionE, double positionN) {
         int result = -1;
         try {
@@ -131,28 +113,15 @@ public class DaoCaninette extends DataBaseConnexion {
         return result;
     }
 
-<<<<<<< HEAD
-    public int updateCaninette(int id, String etat) {
-        int result = 0;
-        try {
-            String sql = "UPDATE Caninettes SET Can_Etat = ? WHERE Can_id = ?;";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, etat);
-            statement.setInt(2, id);
-            result = statement.executeUpdate();
-
-        } catch (SQLException e) {
-
-=======
-    //Method that allow to update a caninette on database
     /**
+     * Method that allow to update a caninette on database
      *
-     * @param id
-     * @param etat
-     * @param adresse
-     * @param numero
-     * @param remarques
-     * @return
+     * @param id        int
+     * @param etat      string
+     * @param adresse   string
+     * @param numero    string
+     * @param remarques string
+     * @return int
      */
     public int updateCaninette(int id, String etat, String adresse, String numero, String remarques) {
         int result = 0;
@@ -173,8 +142,9 @@ public class DaoCaninette extends DataBaseConnexion {
         return result;
     }
 
-    //Method that allow to delete a caninette on database
     /**
+     * Method that allow to delete a caninette on database
+     *
      * @param id
      * @return
      */
@@ -186,27 +156,15 @@ public class DaoCaninette extends DataBaseConnexion {
             statement.setInt(1, id);
             result = statement.executeUpdate();
         } catch (SQLException e) {
->>>>>>> 17e033ba3480eaae5c522fa9d693989fb2dba8ae
+
             e.printStackTrace();
         }
         return result;
     }
 
-<<<<<<< HEAD
-    public int deleteCaninette(int id) {
-        int result = 0;
-        try {
-            String sql = "DELETE FROM  Caninettes WHERE Can_id = ?;";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, id);
-            result = statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-=======
-    //Method that allow to get Caninette
     /**
+     * Method that allow to get Caninette
+     *
      * @param id
      * @return
      */
@@ -228,6 +186,5 @@ public class DaoCaninette extends DataBaseConnexion {
             System.err.println("Erreur SQL : " + e.getMessage());
         }
         return caninette;
->>>>>>> 17e033ba3480eaae5c522fa9d693989fb2dba8ae
     }
 }

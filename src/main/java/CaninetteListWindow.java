@@ -16,7 +16,7 @@ public class CaninetteListWindow extends JFrame implements ActionListener {
     public CaninetteListWindow(String aTitle) throws SQLException {
         setTitle(aTitle);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        DaoCaninette daoCaninette = new DaoCaninette("jdbc:sqlite:mydatabase.db");
+        DaoCaninette daoCaninette = new DaoCaninette(CaniCrottes.getSqliteConnection(false));
 
         JPanel jpHaut = new JPanel(new BorderLayout());
         add(jpHaut, "North");
