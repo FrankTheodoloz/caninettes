@@ -12,7 +12,7 @@ import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
-public class CaninetteUnitTest  {
+public class CaninetteUnitTest {
 
 
     // Test that the Caninette's to String is correct
@@ -47,23 +47,23 @@ public class CaninetteUnitTest  {
         DaoCaninette daoCanninettes = new DaoCaninette("jdbc:sqlite:mydatabaseTest.db");
         int testValue = -1;
 
-        assertThat(daoCanninettes.insertCaninette("Adresse","344", "Posée", "", 26.4, 27.4),not(equalTo(testValue)));
+        assertThat(daoCanninettes.insertCaninette("Adresse", "344", "Posée", "", 26.4, 27.4), not(equalTo(testValue)));
     }
 
     // Test that the method checkUpdateCaninette() update a caninette thanks to the return(statement.executeUpdate()) from the method
     @Test
-    public void checkUpdateCaninette() throws SQLException  {
+    public void checkUpdateCaninette() throws SQLException {
         DaoCaninette daoCanninettes = new DaoCaninette("jdbc:sqlite:mydatabaseTest.db");
         int expectedResult = 1;
-        assertEquals(expectedResult, daoCanninettes.updateCaninette(1,"Posée"));
+        assertEquals(expectedResult, daoCanninettes.updateCaninette(1, "Posée"));
     }
 
     // Test that the method checkDeleteCaninette() delete a caninette thanks to the return(statement.executeUpdate()) from the method
     @Test
-    public void checkDeleteCaninette() throws SQLException  {
+    public void checkDeleteCaninette() throws SQLException {
         DaoCaninette daoCanninettes = new DaoCaninette("jdbc:sqlite:mydatabaseTest.db");
         int expectedResult = 1;
-        int idTested = daoCanninettes.insertCaninette("AdresseTest","344", "Posée", "", 26.4, 27.4);
+        int idTested = daoCanninettes.insertCaninette("AdresseTest", "344", "Posée", "", 26.4, 27.4);
         assertEquals(expectedResult, daoCanninettes.deleteCaninette(idTested));
     }
 

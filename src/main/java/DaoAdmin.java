@@ -12,8 +12,14 @@ public class DaoAdmin extends DataBaseConnexion {
         //System.out.println(dao.loginAdmin("AdminCani", "adminMDP"));
     }
 
+    //Method to check if the user is an admin or not
 
-    public String loginAdmin(String log, String psd){
+    /**
+     * @param log
+     * @param psd
+     * @return
+     */
+    public String loginAdmin(String log, String psd) {
         String result = null;
         try {
             Statement statement = connection.createStatement();
@@ -25,9 +31,9 @@ public class DaoAdmin extends DataBaseConnexion {
                 // read the result set
                 Admin admin = new Admin(rs.getInt("Adm_id"), rs.getString("Adm_Nom"), rs.getString("Adm_Prenom"), rs.getString("Adm_Login"), rs.getString("Adm_Motdepasse"));
                 // A faire champ.getText().equalsadmin.getLogin() etc.
-                if (admin.getLogin().equals(log) && admin.getMdp().equals(psd)){
+                if (admin.getLogin().equals(log) && admin.getMdp().equals(psd)) {
                     result = ("Vous êtes connecté");
-                }else{
+                } else {
                     result = ("Vous n'êtes pas Admin");
                 }
             }
